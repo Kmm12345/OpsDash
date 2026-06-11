@@ -1,0 +1,111 @@
+.page {
+  min-height: 100vh;
+  padding: 40px;
+  background: #0f172a;
+  color: #e5e7eb;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 0;
+}
+
+.cards {
+  display: flex;
+  gap: 16px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 20px;
+  width: 180px;
+}
+
+.card h2 {
+  font-size: 34px;
+  margin: 0;
+}
+
+.card p {
+  color: #94a3b8;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+  background: #1e293b;
+}
+
+th,
+td {
+  border: 1px solid #334155;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background: #020617;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-healthy {
+  background: #14532d;
+  color: #bbf7d0;
+}
+
+.status-degraded {
+  background: #713f12;
+  color: #fde68a;
+}
+
+.status-down {
+  background: #7f1d1d;
+  color: #fecaca;
+}
+
+.status-open,
+.status-investigating,
+.status-mitigating,
+.status-monitoring {
+  background: #1e3a8a;
+  color: #bfdbfe;
+}
+
+.severity-critical {
+  background: #7f1d1d;
+  color: #fecaca;
+}
+
+.severity-high {
+  background: #7c2d12;
+  color: #fed7aa;
+}
+
+.severity-medium {
+  background: #713f12;
+  color: #fde68a;
+}
+
+.severity-low {
+  background: #1e3a8a;
+  color: #bfdbfe;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
