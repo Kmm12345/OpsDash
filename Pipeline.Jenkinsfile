@@ -12,7 +12,16 @@ pipeline {
             steps {
                 dir('Backend') {
                     bat 'python -m venv venv'
-                    bat 'venv\\Scripts\\pip install -r requirements.txt'
+                    bat 'venv\\Scripts\\python.exe -m pip install --upgrade pip'
+                    bat 'venv\\Scripts\\python.exe -m pip install -r requirements.txt'
+                }
+            }
+        }
+
+        stage('Backend Validation') {
+            steps {
+                dir('Backend') {
+                    bat 'venv\\Scripts\\python.exe -m py_compile main.py'
                 }
             }
         }
