@@ -22,6 +22,7 @@ pipeline {
             steps {
                 dir('Backend') {
                     bat 'venv\\Scripts\\python.exe -m py_compile main.py'
+                    echo 'Backend validation completed successfully.'
                 }
             }
         }
