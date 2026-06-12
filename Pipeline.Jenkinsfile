@@ -132,12 +132,12 @@ pipeline {
 
                     venv\\Scripts\\python.exe -m pip install -r requirements.txt
 
-                    start "OpsDash DEV Backend" cmd /c "venv\\Scripts\\python.exe -m uvicorn main:app --host 127.0.0.1 --port 9000"
+                    start "OpsDash DEV Backend" cmd /c "venv\\Scripts\\python.exe -m uvicorn main:app --host 127.0.0.1 --port 9000 > E:\\Deployments\\OpsDash\\Dev\\backend.log 2>&1"
 
                     echo Starting DEV OpsDash frontend...
 
                     cd /d "%DEV_DEPLOY_PATH%\\Frontend"
-                    start "OpsDash DEV Frontend" cmd /c "python -m http.server 3000"
+                    start "OpsDash DEV Frontend" cmd /c "python -m http.server 3000 > E:\\Deployments\\OpsDash\\Dev\\frontend.log 2>&1"
 
                     echo DEV OpsDash start commands issued.
                 '''
