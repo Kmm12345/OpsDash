@@ -68,6 +68,23 @@ pipeline {
             }
         }
 
+        stage('Stop Dev Application') {
+            when {
+                expression { params.TARGET_ENV == 'DEV' }
+            }
+
+            steps {
+                bat '''
+                    echo Stopping existing DEV OpsDash processes...
+
+                    powershell -Command "Get-NetTCPConnection -LocalPort 9000 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }"
+                    powershell -Command "Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }"
+
+                    echo Existing DEV OpsDash processes stopped.
+                '''
+            }
+        }
+
         stage('Deploy Application') {
             steps {
                 script {
@@ -95,6 +112,35 @@ pipeline {
                         '''
                     }
                 }
+            }
+        }
+
+        stage('Start Dev Application') {
+            when {
+                expression { params.TARGET_ENV == 'DEV' }
+            }
+
+            steps {
+                bat '''
+                    echo Starting DEV OpsDash backend...
+
+                    cd /d "%DEV_DEPLOY_PATH%\\Backend"
+
+                    if not exist venv (
+                        python -m venv venv
+                    )
+
+                    venv\\Scripts\\python.exe -m pip install -r requirements.txt
+
+                    start "OpsDash DEV Backend" cmd /c "venv\\Scripts\\python.exe -m uvicorn main:app --host 127.0.0.1 --port 9000"
+
+                    echo Starting DEV OpsDash frontend...
+
+                    cd /d "%DEV_DEPLOY_PATH%\\Frontend"
+                    start "OpsDash DEV Frontend" cmd /c "python -m http.server 3000"
+
+                    echo DEV OpsDash start commands issued.
+                '''
             }
         }
 
